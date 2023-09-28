@@ -5,4 +5,4 @@
 
 ## Ссылки на проект
 
-Backend https://api.mesto.hh.nomoredomainsrocks.ru
+Backend https://api.movies.hh.nomoredomainsrocks.ru
