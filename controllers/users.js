@@ -97,9 +97,26 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.updateUserInfo = (req, res, next) => {
-  const { name } = req.body;
+  const { name, email } = req.body;
 
-  User.findByIdAndUpdate(req.user._id, { name }, { new: true, runValidators: true })
+  User.find({ email })
+    .then((email) => {
+      if (email) {
+        return next(new BadRequesError('Данная почта не может быть использованна'));
+      }
+      User.updateOne(req.user._id, { name, email }, { new: true, runValidators: true })
+        .then((user) => res.status(200).send({ user }));
+    })
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        return next(new BadRequesError('Переданы некорректные данные при создании пользователя.'));
+      } if (err.name === "CastError") {
+        return next(new BadRequesError('Пользователь по указанному id не найден.'));
+      }
+      next(err);
+    });
+
+  User.findByIdAndUpdate(req.user._id, { name, email }, { new: true, runValidators: true })
     .then((user) => res.status(200).send({ user }))
     .catch((err) => {
       if (err.name === "ValidationError") {

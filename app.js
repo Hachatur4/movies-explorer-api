@@ -4,33 +4,30 @@ const mongoose = require('mongoose');
 const app = express();
 const helmet = require('helmet');
 const cors = require('cors');
-const rateLimit = require('express-rate-limit');
 const port = 3000;
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const { createUser, login } = require('./controllers/users');
-const auth = require('./middlewares/auth');
-const users = require('./routes/users');
-const movies = require('./routes/movies');
+const { rateLimiter } = require('./middlewares/rate-limit');
 const NotFoundError = require('./errors/not-found-error');
 const errorHandler = require('./middlewares/error-handler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { NODE_ENV, DB_SERVER } = process.env;
+const { createUser, login } = require('./controllers/users');
+const users = require('./routes/users');
+const movies = require('./routes/movies');
+const auth = require('./middlewares/auth');
+const { deleteJwtCookie } = require('./middlewares/deleteCookie');
 const {
   loginValidator,
   createUserValidator,
 } = require('./validators/validators');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { deleteJwtCookie } = require('./middlewares/deleteCookie');
-
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
+mongoose.connect(`mongodb://${NODE_ENV === 'production' ? DB_SERVER : '127.0.0.1:27017/bitfilmsdb'}`, {
   useNewUrlParser: true,
 }).then(() => {
   console.log('MongoDB Active');
 });
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
+rateLimiter();
 
 app.use(cors());
 

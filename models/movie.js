@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const card = new mongoose.Schema({
   country: {
@@ -31,20 +32,17 @@ const card = new mongoose.Schema({
   },
   image: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
+    validate: [validator.isURL, 'Некорректная ссылка'],
     required: true,
   },
   trailerLink: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
+    validate: [validator.isURL, 'Некорректная ссылка'],
     required: true,
   },
   thumbnail: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
+    validate: [validator.isURL, 'Некорректная ссылка'],
     required: true,
   },
   owner: {
