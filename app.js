@@ -21,7 +21,8 @@ const {
   loginValidator,
   createUserValidator,
 } = require('./validators/validators');
-mongoose.connect(`mongodb://${NODE_ENV === 'production' ? DB_SERVER : '127.0.0.1:27017/bitfilmsdb'}`, {
+
+mongoose.connect(NODE_ENV === 'production' ? DB_SERVER : 'mongodb://127.0.0.1:27017/bitfilmsdb', {
   useNewUrlParser: true,
 }).then(() => {
   console.log('MongoDB Active');
