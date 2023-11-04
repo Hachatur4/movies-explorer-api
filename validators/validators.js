@@ -8,7 +8,7 @@ module.exports.createMovieValidator = celebrate({
     director: Joi.string().required().min(2).max(30),
     duration: Joi.number().required(),
     year: Joi.string().required().min(2).max(30),
-    description: Joi.string().required().min(2).max(30),
+    description: Joi.string().required().min(2),
     image: Joi.string().required().custom(url, 'url validation'),
     trailerLink: Joi.string().required().custom(url, 'url validation'),
     thumbnail: Joi.string().required().custom(url, 'url validation'),
