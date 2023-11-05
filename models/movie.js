@@ -27,7 +27,6 @@ const card = new mongoose.Schema({
   description: {
     type: String,
     minlength: 2,
-    maxlength: 30,
     required: true,
   },
   image: {
