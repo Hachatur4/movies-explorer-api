@@ -5,13 +5,13 @@ const card = new mongoose.Schema({
   country: {
     type: String,
     minlength: 2,
-    maxlength: 30,
+    maxlength: 80,
     required: true,
   },
   director: {
     type: String,
     minlength: 2,
-    maxlength: 30,
+    maxlength: 80,
     required: true,
   },
   duration: {
@@ -57,13 +57,13 @@ const card = new mongoose.Schema({
   nameRU: {
     type: String,
     minlength: 2,
-    maxlength: 30,
+    maxlength: 100,
     required: true,
   },
   nameEN: {
     type: String,
     minlength: 2,
-    maxlength: 30,
+    maxlength: 100,
     required: true,
   },
   createdAt: {

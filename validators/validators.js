@@ -4,8 +4,8 @@ const url = require('./jo-url-validator');
 
 module.exports.createMovieValidator = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required().min(2).max(30),
-    director: Joi.string().required().min(2).max(30),
+    country: Joi.string().required().min(2).max(80),
+    director: Joi.string().required().min(2).max(80),
     duration: Joi.number().required(),
     year: Joi.string().required().min(2).max(30),
     description: Joi.string().required().min(2),
@@ -13,8 +13,8 @@ module.exports.createMovieValidator = celebrate({
     trailerLink: Joi.string().required().custom(url, 'url validation'),
     thumbnail: Joi.string().required().custom(url, 'url validation'),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().required().min(2).max(30),
-    nameEN: Joi.string().required().min(2).max(30),
+    nameRU: Joi.string().required().min(2).max(100),
+    nameEN: Joi.string().required().min(2).max(100),
   }),
 });
 
