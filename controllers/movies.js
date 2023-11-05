@@ -35,6 +35,7 @@ module.exports.deleteMovies = (req, res, next) => {
 };
 
 module.exports.createMovies = (req, res, next) => {
+  console.log(req.user);
   const {
     country,
     director,
