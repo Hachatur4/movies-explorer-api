@@ -13,7 +13,8 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.deleteMovies = (req, res, next) => {
-  Movies.findById(req.params.movieId)
+  console.log(req.params._id);
+  Movies.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Указанного id нет в базе данных.');

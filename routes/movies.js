@@ -7,7 +7,6 @@ const {
 
 const {
   createMovieValidator,
-  movieIdValidator,
 } = require('../validators/validators');
 
 router.get('/', getMovies);
