@@ -120,7 +120,7 @@ module.exports.updateUserInfo = (req, res, next) => {
         });
       }
       return next(
-        new BadRequesError("Данная почта не может быть использованна")
+        new VerificationError("Данная почта не может быть использованна")
       );
     })
     .catch((err) => {

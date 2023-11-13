@@ -13,7 +13,6 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.deleteMovies = (req, res, next) => {
-  console.log(req.params._id);
   Movies.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
